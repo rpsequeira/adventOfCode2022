@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello World!")
+	fmt.Println("Day 1!")
 	f, err := os.Open("input.txt")
 
 	if err != nil {
@@ -45,9 +45,9 @@ func main() {
 
 		previous = file[i]
 	}
-	fmt.Println(counter)
+	fmt.Println("Part 1 answer: ", counter)
 
-	fmt.Println("Part 1:", time.Since(startTime))
+	fmt.Println("Part 1 duration:", time.Since(startTime))
 	startTime = time.Now()
 	//part 2
 
@@ -61,7 +61,7 @@ func main() {
 
 		previous = sum
 	}
-	fmt.Println(counter)
+	fmt.Println("Part 2 answer: ", counter)
 
-	fmt.Println("Part 2:", time.Since(startTime))
+	fmt.Println("Part 2 duration:", time.Since(startTime))
 }
