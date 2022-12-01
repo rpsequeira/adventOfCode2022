@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
+	"strconv"
 	"time"
 )
 
@@ -21,47 +23,53 @@ func main() {
 	reader := bufio.NewScanner(f)
 
 	file := []int{}
+	caloriesPerElf := 0
 	for reader.Scan() {
-		var number int
-		var direction string
-		_, err := fmt.Sscanf(reader.Text(), "%s %d", &direction, &number)
-		if err != nil {
-			break
+		line := reader.Text()
+		if line == "" {
+			file = append(file, caloriesPerElf)
+			caloriesPerElf = 0
+		} else {
+			var calories string
+			_, err := fmt.Sscanf(line, "%s", &calories)
+			if err != nil {
+				fmt.Println("Error 1")
+				break
+			}
+			c, err := strconv.Atoi(calories)
+			if err != nil {
+				fmt.Println("Error 2")
+				break
+			}
+			caloriesPerElf = caloriesPerElf + c
 		}
 
-		file = append(file, number)
 	}
 
 	fmt.Println("Read time:", time.Since(startTime))
 	startTime = time.Now()
 	// part 1
 
-	previous := -1
-	counter := 0
-	for i := range file {
-		if previous != -1 && previous < file[i] {
-			counter++
+	highest := 0
+	for _, c := range file {
+		if highest < c {
+			highest = c
 		}
-
-		previous = file[i]
 	}
-	fmt.Println("Part 1 answer: ", counter)
+	fmt.Println("Part 1 answer: ", highest)
 
 	fmt.Println("Part 1 duration:", time.Since(startTime))
 	startTime = time.Now()
 	//part 2
 
-	previous = -1
-	counter = 0
-	for i := 0; i < len(file)-2; i++ {
-		sum := file[i] + file[i+1] + file[i+2]
-		if previous != -1 && previous < sum {
-			counter++
-		}
+	highest2 := 0
 
-		previous = sum
+	sort.Ints(file)
+	for i := len(file) - 1; i > len(file)-4; i-- {
+		highest2 = highest2 + file[i]
 	}
-	fmt.Println("Part 2 answer: ", counter)
+
+	fmt.Printf("Part 2 answer: %d\n", highest2)
 
 	fmt.Println("Part 2 duration:", time.Since(startTime))
 }
