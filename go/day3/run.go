@@ -14,7 +14,7 @@ type game struct {
 }
 
 func main() {
-	fmt.Println("Day 2!")
+	fmt.Println("Day 3!")
 	f, err := os.Open("input.txt")
 
 	if err != nil {
