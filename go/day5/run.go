@@ -16,7 +16,7 @@ type pair struct {
 }
 
 func main() {
-	fmt.Println("Day 4!")
+	fmt.Println("Day 5!")
 	f, err := os.Open("input.txt")
 
 	if err != nil {
