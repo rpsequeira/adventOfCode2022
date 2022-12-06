@@ -15,7 +15,7 @@ type move struct {
 }
 
 func main() {
-	fmt.Println("Day 6!")
+	fmt.Println("Day 7!")
 	f, err := os.Open("input.txt")
 
 	if err != nil {
